@@ -1,0 +1,4 @@
+singglylinkedlistfile.LoadFromFile
+singglylinkedlistfile.Person
+singglylinkedlistfile.MyList
+singglylinkedlistfile.Node
