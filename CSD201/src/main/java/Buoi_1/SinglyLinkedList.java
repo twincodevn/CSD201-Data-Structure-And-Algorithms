@@ -154,6 +154,19 @@ public class SinglyLinkedList {
             end--;
         }
     }
+    
+    // XOA NODE CHI DINH TRONG DANH SACH 
+    public void deleteNode(Node p){
+        
+        if(head == null || p == null) return;
+        Node temp = head;
+        while(!temp.equals(p)){
+            temp = temp.next;
+        }
+        Node ke = temp.next.next;
+        temp.next = ke;
+        
+    }
     // . DUYỆT DANH SÁCH ( TRAVERSE ) 
     public void traverse(){
         // tao bien temp 
@@ -192,7 +205,10 @@ public class SinglyLinkedList {
         System.out.println("Sau khi dao chieu: ");
         myList.reverse();
         myList.traverse();
-        
+        Node temp = myList.head;
+        System.out.println(temp);
+        myList.deleteNode(temp);
+        myList.traverse();
         
         
     }
