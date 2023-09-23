@@ -1,2 +1,0 @@
-arraybasedqueue.ArrayQueue
-arraybasedqueue.Main
