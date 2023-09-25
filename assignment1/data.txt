@@ -1,0 +1,32 @@
+#Line 1 - f1.1. Data at next Line (2)
+Ip	SS 	Ip	Ip 	Ip	SS 	Ip	Op	Ip 	Ip	Op 	Ip	Ip	Ip
+11	Note20	11Pro	12	13	Note21	12Pro	A17	14	7	A16	7Plus	8	8Plus
+10.0	14.0	15.0	18.0	33.0	17.0	19.0	5.2	33.0	2.0	3.4	3.0	3.0	3.52
+#Line 5 - f2.1. Data at next Line (2)
+Ip	SS 	Ip	Ip 	Ip	SS 	Ip	Op	Ip 	Ip	Op 	Ip	Ip	Ip
+11	Note20	11Pro	12	13	Note21	12Pro	A17	14	7	A16	7Plus	8	8Plus
+10.0	14.0	15.0	18.0	33.0	17.0	19.0	5.2	33.0	2.0	3.4	3.0	3.0	3.52
+#Line 9 - f3.1. Data at next Line (2)
+Ip	SS 	Ip	Ip 	Ip	SS 	Ip	Op	Ip 	Ip	Op 	Ip	Ip	Ip
+11	Note20	11Pro	12	13	Note21	12Pro	A17	14	7	A16	7Plus	8	8Plus
+10.0	14.0	15.0	18.0	33.0	17.0	19.0	5.2	33.0	2.0	3.4	3.0	3.0	3.52
+#Line 13 - f4.1. Data at next Line (2)
+Ip	SS 	Ip	Ip 	Ip	SS 	Ip	Op	Ip 	Ip	Op 	Ip	Ip	Ip
+11	Note20	11Pro	12	13	Note21	12Pro	A17	14	7	A16	7Plus	8	8Plus
+10.0	14.0	15.0	18.0	33.0	17.0	19.0	5.2	33.0	2.0	3.4	3.0	3.0	3.52
+#Line 17 - f5.1. Data at next Line (2)
+Ip	SS 	Ip	Ip 	Ip	SS 	Ip	Op	Ip 	Ip	Op 	Ip	Ip	Ip
+11	Note20	11Pro	12	13	Note21	12Pro	A17	14	7	A16	7Plus	8	8Plus
+10.0	14.0	15.0	18.0	33.0	17.0	19.0	5.2	33.0	2.0	3.4	3.0	3.0	3.52
+#Line 21 - f6.1. Data at next Line (2)
+Ip	SS 	Ip	Ip 	Ip	SS 	Ip	Ip 	Ip	Ip	Ip	Ip
+13	Note20	11Pro	12	13	Note21	12Pro	14	7	7Plus	8	14
+20.0	14.0	15.0	18.0	33.0	17.0	19.0	33.0	2.0	3.0	3.0	33
+#Line 1 - f7.1. Data at next Line (2)
+Ip	SS 	Ip	Ip 	Ip	SS 	Ip	Op	Ip 	Ip	Op 	Ip	Ip	Ip
+11	Note20	11Pro	12	13	Note21	12Pro	A17	14	7	A16	7Plus	8	8Plus
+10.0	14.0	15.0	18.0	33.0	17.0	19.0	5.2	33.0	2.0	3.4	3.0	3.0	3.52
+#Line 1 - f8.1. Data at next Line (2)
+Ip	SS 	Ip	Ip 	Ip	SS 	Ip	Op	Ip 	Ip	Op 	Ip	Ip	Ip
+11	Note20	11Pro	12	13	Note21	12Pro	A17	14	7	A16	7Plus	8	8Plus
+10.0	14.0	15.0	18.0	33.0	17.0	19.0	5.2	33.0	2.0	3.4	3.0	3.0	3.52

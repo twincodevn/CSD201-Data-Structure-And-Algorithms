@@ -1,0 +1,18 @@
+Line 0 - The next line is line 1 (f1)
+ Q1  Q2  Q4  Q9  TD  TB  TD  Q3
+ 9  5  6  1  7  4  2  3
+ 8  3  5  1  9  7  2  9
+Line 4 - The next line is line 5 (f2)
+ Q1  Q2  Q4  Q9  TD
+ 9  6  8  5  4
+ 8  3  5  4  9
+Line 8 - The next line is line 9 (f3)
+ Q1  Q2  Q4  Q9  TD  TB  TD  Q3
+ 9  5  6  15  7  4  3  3
+ 18  3  5  18  9  7  2  9
+Line 12 - The next line is line 13 (f4)
+ Q1  Q2  Q4  Q9  TD  TB  TD  Q3
+ 9  5  6  15  7  4  2  3
+ 18  3  5  1  9  7  2  9
+END
+

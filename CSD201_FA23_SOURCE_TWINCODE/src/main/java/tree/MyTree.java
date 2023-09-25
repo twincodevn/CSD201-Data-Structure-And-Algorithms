@@ -4,98 +4,240 @@
  */
 package tree;
 
-import tree.MyTree.Person;
+import java.util.LinkedList;
 
-/**
- *
- * @author bravee06
- */
 public class MyTree {
-    class Person {
-        private int age;
-        private String name;
+    class MyQueue {
+        LinkedList<Object> head;
 
-        public Person() {
+        public MyQueue() {
+            head = new LinkedList<>();
         }
 
-        public Person(int age, String name) {
-            this.age = age;
-            this.name = name;
+        public void enqueue(Object obj) {
+            head.addLast(obj);
         }
 
-        public int getAge() {
-            return age;
+        public boolean isEmpty() {
+            return head.isEmpty();
         }
 
-        public void setAge(int age) {
-            this.age = age;
+        public Object dequeue() {
+            if (isEmpty()) {
+                return null;
+            } else {
+                return head.removeFirst();
+            }
         }
 
-        public String getName() {
-            return name;
+        public Object front() {
+            if (isEmpty())
+                return null;
+            return head.getFirst();
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void clear() {
+            head = null;
         }
-
-        @Override
-        public String toString() {
-            return "Person{" + "age=" + age + ", name=" + name + '}';
-        }
-        
     }
+
     class Node {
-        Object data;
+        int data;
         Node left;
         Node right;
 
-        public Node() {
+        public Node(int data) {
+            this.data = data;
         }
 
-        public Node(Object data, Node left, Node right) {
+        public Node(int data, Node left, Node right) {
             this.data = data;
             this.left = left;
             this.right = right;
         }
 
-        public Node(Object data) {
-            this.data = data;
+    }
+
+    Node root;
+
+    public MyTree() {
+        root = null;
+    }
+
+    public boolean isEmpty() {
+        return root == null;
+    }
+
+    // duyệt node
+    public void visit(Node p) {
+        if (p == null)
+            return;
+        System.out.print(p.data + " ");
+    }
+
+    // return a Node which key of Node = given key
+    // public Node search(Node p,int key){
+    // // if(p == null) return null;
+
+    // }
+    public Node search(Node p, int key) {
+        if (p == null)
+            return null;
+        if (p.data == key)
+            return p;
+        else if (p.data > key)
+            return search(p.left, key);
+        return search(p.right, key);
+    }
+
+    // insert a node into tree
+    public void insert(int key) {
+        Node p = new Node(key);
+        Node f = null; // Father node ( node cha )
+        Node q = root; // Node con trỏ , chạy đến khi nó gặp null
+        while (q != null) {
+            if (q.data == key) {
+                System.out.println("Key cannot duplicated ! Not insert");
+                return;
+            }
+            f = q;
+            if (q.data < key) {
+                q = q.left;
+            } else {
+                q = q.right;
+            }
+        }
+        if (f == null) {
+            root = p;
+        } else if (f.data > key) {
+            f.right = p;
+        } else {
+            f.left = p;
+        }
+    }
+
+    // duyệt cây theo chiều sâu
+    public void preOrder(Node p) {
+        if (p == null)
+            return;
+        visit(p);
+        preOrder(p.left);
+        preOrder(p.right);
+    }
+
+    public void postOrder(Node p) {
+        if (p == null)
+            return;
+        postOrder(p.left);
+        postOrder(p.right);
+        visit(p);
+    }
+
+    public void inOrder(Node p) {
+        if (p == null) {
+            return;
+        }
+        inOrder(p.left);
+        visit(p);
+        inOrder(p.right);
+    }
+
+    // duyệt theo chiều rộng
+    public void BFT(Node p) {
+        if (p == null)
+            return;
+        MyQueue m = new MyQueue();
+        m.enqueue(p);
+        while (!m.isEmpty()) {
+            Node q = (Node) m.dequeue();
+            visit(q);
+            if (q.left != null)
+                m.enqueue(q.left);
+            if (q.right != null)
+                m.enqueue(q.right);
+        }
+    }
+
+    // tính chiều cao của cây
+    public int height(Node p) {
+        if (p == null)
+            return 0;
+        else {
+            int leftDepth = height(p.left);
+            int rightDepth = height(p.right);
+            if (leftDepth > rightDepth) {
+                return (leftDepth + 1);
+            } else {
+                return (rightDepth + 1);
+            }
         }
 
-        @Override
-        public String toString() {
-            return data.toString() + "";
-        }
-        
-        
     }
-    
-    Node root;
-    public void insertNode(Node temp, Person key){
-        Node newNode = new Node(key,null,null);
-        Person newNodePerson = (Person)key;
-        if(temp == null){
-           temp = newNode;
-           System.out.println("");
-        }else{
-            Node q,f;
-            q = temp;
-            while(q != null){
-                if(q.equals(key)){
-                    System.out.println("Data does existed in tree ! Not allowed insert !");
-                    return;
-                }else{
-                    f = q;
-                    if(newNodePerson.age > key.age){
-                        q = q.left;
-                    }else{
-                        q = q.right;
-                    }
-                }
-            }
-          
-                
+
+    // xóa node bằng copying
+    public void deleteByCopy(int x) {
+        Node r = search(root, x);
+        if (r == null) {
+            System.out.println("Key does not exist, delete fail");
+            return;
         }
+        // find father of node remove
+        Node f = null;
+        Node q = root;
+        while (q != null) {
+            f = q;
+            if (q.data > x) {
+                q = q.left;
+            } else {
+                q = q.right;
+            }
+        }
+        if (f == null) {
+            root = null;
+            return;
+        }
+        // case 1: r does not children
+        if (r.left == null && r.right == null) {
+            if (f.left == r) {
+                f.left = null;
+            } else {
+                f.right = null;
+            }
+        }
+
+        // case 2: r has left children
+        else if (r.left != null && r.right == null) {
+            if (f.right == r) {
+                f.right = r.left;
+            } else {
+                f.left = r.left;
+            }
+        }
+        // case 3: r has right children
+        else if (r.left == null && r.right != null) {
+            if (f.right == r) {
+                f.right = r.right;
+            } else {
+                f.left = r.right;
+            }
+        }
+        // case 4: r has two children
+        else if (r.left != null && r.right != null) {
+            // tìm q là node lớn nhất bên phải của node bị xóa
+            q = r.left;
+            Node father = null;
+            while (q.right != null) {
+                father = q;
+                q = q.right;
+            }
+            r.data = q.data;
+            if (father == null) {
+                r.left = q.left;
+            } else {
+                father.right = q.left;
+            }
+
+        }
+
     }
 }
