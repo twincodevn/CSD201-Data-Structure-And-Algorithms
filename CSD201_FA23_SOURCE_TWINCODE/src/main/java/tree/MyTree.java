@@ -4,6 +4,8 @@
  */
 package tree;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class MyTree {
@@ -240,4 +242,117 @@ public class MyTree {
         }
 
     }
+
+    // delete by merging
+    void deleteMerging(int x) {
+        Node r = search(root, x);
+        if (r == null) {
+            System.out.println("Key does not exist, delete fail");
+            return;
+        }
+        // find father of node remove
+        Node f = null;
+        Node q = root;
+        while (q != null) {
+            f = q;
+            if (q.data > x) {
+                q = q.left;
+            } else {
+                q = q.right;
+            }
+        }
+
+        // case 1: r does not children
+        if (r.left == null && r.right == null) {
+            if (f.left == r) {
+                f.left = null;
+            } else {
+                f.right = null;
+            }
+        }
+
+        // case 2: r has left children
+        else if (r.left != null && r.right == null) {
+            if (f.right == r) {
+                f.right = r.left;
+            } else {
+                f.left = r.left;
+            }
+        }
+        // case 3: r has right children
+        else if (r.left == null && r.right != null) {
+            if (f.right == r) {
+                f.right = r.right;
+            } else {
+                f.left = r.right;
+            }
+        }
+        // case 4 : r has two children
+        else if (r.left != null && r.right != null) {
+            Node rightMostNode = r.left;
+            while (rightMostNode.right != null) {
+                rightMostNode = rightMostNode.right;
+            }
+            rightMostNode.right = r.right;
+            if (f == null) {
+                root.left = null;
+                root.right = null;
+            }
+            if (f.left == r) {
+                f.left = r.left;
+            } else {
+                f.right = r.right;
+            }
+
+        }
+    }
+
+    // Balance Tree
+    public void balanceTree(ArrayList<Integer> a, int first, int last) {
+        Collections.sort(a);
+        if (first < last) {
+            int mid = (first + last) / 2;
+            insert(a.get(mid));
+            // đệ quy bên trái
+            balanceTree(a, first, mid - 1);
+            // đệ quy bên phải
+            balanceTree(a, mid + 1, last);
+        }
+
+    }
+
+    public Node rotateLeft(Node A) {
+        if (A.right == null)
+            return A;
+        Node B = A.right;
+        A.right = B.left;
+        B.left = A;
+        return B;
+    }
+
+    public Node rotateRight(Node A) {
+        if (A.left == null)
+            return A;
+        Node B = A.left;
+        A.left = B.right;
+        B.right = A;
+        return B;
+    }
+
+    public Node rotateRightLeft(Node A) {
+        if (A.right == null)
+            return A;
+        Node C = A.right;
+        rotateRight(C);
+        return rotateLeft(A);
+    }
+
+    public Node rotateLeftRight(Node A) {
+        if (A.left == null)
+            return A;
+        Node C = A.left;
+        rotateLeft(C);
+        return rotateRight(A);
+    }
+
 }
