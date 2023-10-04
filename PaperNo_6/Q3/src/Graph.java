@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 //-------------------------------------------------------------------------------
 public class Graph {
+    
     int [][] a; 
     int n;
     char v[];
