@@ -132,6 +132,7 @@ public class Main {
             {0,0,1,0,0},
             {1,0,0,0,0},
         };
+        
         g.setData(b);
         g.depth(0);
         g.breadth(1);

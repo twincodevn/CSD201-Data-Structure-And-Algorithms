@@ -39,6 +39,9 @@ public class SinglyLinkedList {
         // co rong hay khong 
         return head == tail && head == null;
     }
+    public void clear(){
+        head = tail = null;
+    }
     // 1. ADD 1 NODE VAO LINKED LIST 
     // chèn một node vào cuối danh sách 
     public void addLast(int x){
@@ -208,6 +211,9 @@ public class SinglyLinkedList {
         Node temp = myList.head;
         System.out.println(temp);
         myList.deleteNode(temp);
+        myList.traverse();
+        myList.clear();
+       
         myList.traverse();
         
         
