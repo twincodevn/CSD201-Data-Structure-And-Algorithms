@@ -2,9 +2,9 @@ import java.io.*;
 import java.util.*;
 //-------------------------------------------------------------------------------
 public class Graph {
-    int [][] a; 
-    int n;
-    char v[];
+    int [][] a; // ma trận kề 
+    int n;// số đỉnh 
+    char v[];// mảng chứa các đỉnh 
     int deg[];
     Graph() {
         v = "ABCDEFGHIJKLMNOP".toCharArray();
@@ -88,6 +88,7 @@ public class Graph {
         
         System.out.println();
     }
+    
 
     void depth_rec(boolean [] visited,int k, RandomAccessFile f) throws Exception {
         fvisit(k,f);
@@ -130,7 +131,7 @@ public class Graph {
          */
         //---------------------------------------------------------------------------------------
         //------ Start your code here------------------------------------------------------------
-        
+        breadth_With_Constraint(2,f);
  
         
         
@@ -141,7 +142,33 @@ public class Graph {
         f.writeBytes("\r\n");
         f.close();
     }
-
+void breadth_With_Constraint(int k, RandomAccessFile f) throws Exception {
+        Queue q = new Queue();
+        int i,h;
+        boolean [] enqueued = new boolean[n];
+        for(i = 0; i < n; i++) 
+            enqueued[i] = false;
+        
+        q.enqueue(k);
+        enqueued[k] = true;
+        int count = 0;
+        // count = 1 -> count = 5
+        while(!q.isEmpty()){
+            h = q.dequeue();
+            if(count != 0 && count <= 5 ){
+                fvisit(h, f); 
+            }
+            count++;
+            
+            for(i = 0; i < n; i++)
+                if(!enqueued[i] && a[h][i] > 0) {
+                    q.enqueue(i);
+                    enqueued[i] = true;
+                }
+        }
+        
+        System.out.println();
+    }
     void f2() throws Exception {
         loadData(1);
         String fname = "f2.txt";
@@ -160,7 +187,7 @@ public class Graph {
          */
         //---------------------------------------------------------------------------------------
         //------ Start your code here------------------------------------------------------------
-        
+        depth(4,f);
  
         
         

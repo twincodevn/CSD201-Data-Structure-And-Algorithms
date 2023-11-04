@@ -27,6 +27,7 @@ public class BSTree {
             f.writeBytes(p.getInfo() + " ");
     }
     
+    // duyệt theo theo chiều rộng 
     public void breadth(Node p, RandomAccessFile f) throws Exception {
         if(p == null) 
             return;
@@ -113,7 +114,21 @@ public class BSTree {
     void insert(String xOwner, int xPrice, int xColor) {
                 //---------------------------------------------------------------------------------------
         //------ Start your code here------------------------------------------------------------
-        
+        if(xOwner.charAt(0) == 'B'){
+            return;
+        }
+        Bird x = new Bird(xOwner, xPrice, xColor);
+        Node q = new Node(x);
+        if(isEmpty()) {root=q;return;}
+        Node f, p; f=null; p=root;
+        while(p!=null) {
+            if(p.getInfo().price==x.price) {
+                return;
+            }
+            f=p;
+            if(x.price<p.getInfo().price) p=p.left; else p=p.right;
+        }
+        if(x.price<f.getInfo().price) f.left=q; else f.right=q;
         
         
         
@@ -165,7 +180,7 @@ public class BSTree {
          */
         //---------------------------------------------------------------------------------------
         //------ Start your code here------------------------------------------------------------
-        
+        breadth_With_Contrains(root, f);
        
         
         
@@ -176,6 +191,27 @@ public class BSTree {
         f.writeBytes("\r\n");
         f.close();
     }  
+    // duyệt theo theo chiều rộng với điều kiện
+    public void breadth_With_Contrains(Node p, RandomAccessFile f) throws Exception {
+        if(p == null) 
+            return;
+        Queue q = new Queue();
+        q.enqueue(p);
+        Node r;
+        while(!q.isEmpty()) {
+            r = q.dequeue();
+            if(r.getInfo().color < 6){
+                fvisit(r,f);
+            }
+           
+            
+            if(r.left != null) 
+                q.enqueue(r.left);
+            
+            if(r.right != null) 
+                q.enqueue(r.right);
+        }
+    }
 
     // This method is used for Question 2.3
     void f3() throws Exception {
@@ -201,8 +237,9 @@ public class BSTree {
          */
         //---------------------------------------------------------------------------------------
         //------ Start your code here------------------------------------------------------------
+        int k = maxDepth(root);
+        insert("V", 100-k, 2*k);
         
-      
         
         
         
@@ -213,6 +250,20 @@ public class BSTree {
         f.writeBytes("\r\n");
         f.close();
     }  
+    int maxDepth(Node node) {
+        if (node == null)
+            return 0;
+        else {
+            /* compute the depth of each subtree */
+            int lDepth = maxDepth(node.left);
+            int rDepth = maxDepth(node.right); 
+            /* use the larger one */
+            if(lDepth>rDepth)
+                return (lDepth + 1);
+             else
+                return (rDepth + 1);
+        }
+    }   
 
    
     // This method is used for Question 2.4
@@ -237,7 +288,7 @@ public class BSTree {
         //---------------------------------------------------------------------------------------
         //------ Start your code here------------------------------------------------------------
         
-
+breadth_f4(root, f);
         
         
         
@@ -247,5 +298,24 @@ public class BSTree {
         f.writeBytes("\r\n");
         f.close();
     }  
+    public void breadth_f4(Node p, RandomAccessFile f) throws Exception {
+        if(p == null) 
+            return;
+        Queue q = new Queue();
+        q.enqueue(p);
+        Node r;
+        while(!q.isEmpty()) {
+            r = q.dequeue();
+            if(r.left == null && r.right == null){
+                r.getInfo().color = 0;
+            }
+            
+            if(r.left != null) 
+                q.enqueue(r.left);
+            
+            if(r.right != null) 
+                q.enqueue(r.right);
+        }
+    }
  
  }

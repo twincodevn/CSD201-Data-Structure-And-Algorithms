@@ -69,15 +69,33 @@ public class MyList {
     void addLast(String xDistrict, int xPrice, int xArea) {
         //------------------------------------------------------------------------------------
         //------ Start your code here---------------------------------------------------------
-        
-      
-        
-        
-        
+        if(xPrice <= 0 && xArea <= 0){
+            return;
+        }
+        // ctrl + space -> hint 
+        Apartment new_data = new Apartment(xDistrict, xPrice, xArea);
+        addLast(new_data);
         
         //------ End your code here-----------------------------------------------------------
         //------------------------------------------------------------------------------------
     }
+    //Inserts a new node at the end of a list
+    void addLast(Apartment x) {
+        // Tao node 
+        Node newNode = new Node(x); 
+        
+        // truong hop danh sach rong thi cho head = tail = newNode 
+        if(head == null){
+            head = tail = newNode;
+        }
+        // truong hop da co it nhat mot node 
+        else{
+            // thêm liên kết 
+            tail.next = newNode;
+            // thay đổi lại đuôi 
+            tail = newNode;
+        }
+    }   
     
     /**
      * Do NOT modify this method
@@ -106,6 +124,7 @@ public class MyList {
      
         /**
         * Question 1.2: Update all nodes in the linked list with the Apartment's district "Q2" or "Q9" to "TD", then increase the price by 1.
+        * Update : sử dụng hàm set để thay đổi tất cả các node trong danh sách liên kết nếu tên là Q2 or Q9 thì đổi lại thành TD và tăng giá trị tài sản lên 1 
         *           
         * The output of this method will be written into the file 'f2.txt'. 
         * Therefore you should open this file to see/test your code output.
@@ -115,7 +134,19 @@ public class MyList {
         */
         //------------------------------------------------------------------------------------
         //------ Start your code here---------------------------------------------------------
-
+        // tao bien temp 
+        Node temp = head;
+        // Loop su dung de truy cap node den khi gap null
+        while(temp != null){
+            Apartment a = temp.getInfo();
+            String dis = a.getDistrict();
+            if(dis.equals("Q2") || dis.equals("Q9")){
+                a.setDistrict("TD");
+                a.setPrice(a.getPrice()+1);
+            }
+            // temp nhay qua node ke ben de doc thong tin 
+            temp = temp.next;
+        }
       
         
         
@@ -149,8 +180,41 @@ public class MyList {
         //------------------------------------------------------------------------------------
         //------ Start your code here---------------------------------------------------------
 
-       
+        // duyệt từ đầu đến cuối phần tử trong danh sách  để tìm max area 
+        // duyệt từ đầu đến cuối phần tử trong danh sách  để tìm thằng đầu tiên có max area 
         
+        // lần duyệt 1 
+        // tao bien temp 
+        Node temp = head;
+        int max_area = head.getInfo().area;
+        // Loop su dung de truy cap node den khi gap null
+        while(temp != null){
+            Apartment a = temp.getInfo();
+            int area_cur = a.getArea();
+            if(max_area < area_cur){
+                max_area = area_cur;
+            }
+            // temp nhay qua node ke ben de doc thong tin 
+            temp = temp.next;
+        }
+        // tao bien temp 
+        Node temp1 = head;
+        // Loop su dung de truy cap node den khi gap null
+        while(temp1 != null){
+            Apartment a = temp1.getInfo();
+            int area_cur = a.getArea();
+            if(max_area == area_cur){
+                // đã tìm được thằng đầu tiên 
+                clear();
+                // insert first node 
+                addLast(a);
+                break;
+            }
+            // temp nhay qua node ke ben de doc thong tin 
+            temp1 = temp1.next;
+        }
+      
+        // 
         
         
 
@@ -177,7 +241,7 @@ public class MyList {
         */
         //------------------------------------------------------------------------------------
         //------ Start your code here---------------------------------------------------------
-        
+        sort();
       
         
         
@@ -187,7 +251,35 @@ public class MyList {
         ftraverse(f);
         f.close();
     }
-    
+    // Return number of nodes in the list
+    public int size() {
+        Node p = head; int count = 0;
+        while(p!=null) {count++; p=p.next;}
+        return count;
+    }
+    // Sort the list descending 
+    public void sort() {
+        int n = size();
+        for(int i=0; i<n-1; i++) {
+            for(int j=i+1; j<n; j++) {
+                Node pi=get(i), pj=get(j);
+                if(pi.getInfo().price < pj.getInfo().getPrice()) {
+                    // set price 
+                    int temp1=pi.getInfo().price; pi.getInfo().price=pj.getInfo().price; pj.getInfo().price=temp1;
+                    // set district 
+                    String temp2 = pi.getInfo().district;pi.getInfo().district = pj.getInfo().district;pj.getInfo().district = temp2;
+                    // set area 
+                    int temp3=pi.getInfo().area; pi.getInfo().area=pj.getInfo().area; pj.getInfo().area=temp3;
+                }
+            }
+        }
+    }
+    // Return a node at position i
+    Node get(int i) {
+        Node p=head; int count=0;
+        while(p!=null && count<i) {count++; p = p.next;}
+        return p;
+    }
   
     
 }

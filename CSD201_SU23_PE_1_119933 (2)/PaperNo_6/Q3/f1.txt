@@ -1,2 +1,2 @@
   C  A  F  B  D  H  E  G  I
-
+  A  F  B  D  H
